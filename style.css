@@ -1,9 +1,13 @@
+#grid-container {
+    height: 500px;
+    width: 500px;
+    display: grid;
+}
 #grid-container div {
     display: flex;
 }
 
 #grid-container div div{
-    height: 24px;
-    width: 24px;
+    flex: 1 1 0;
     border: 1px solid black;
 }
