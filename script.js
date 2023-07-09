@@ -1,3 +1,9 @@
+let cells = []
+populateGrid(16);
+document.querySelector("#btn-update-grid").addEventListener("click", updateGrid);
+document.querySelector("#btn-rainbow").addEventListener("click", activateRainbowEffect);
+document.querySelector("#btn-darkening").addEventListener("click", activateDarkeningEffect);
+
 function populateGrid(cellCount){
     const gridContainer = document.querySelector("#grid-container");
     var child = gridContainer.lastElementChild;
@@ -14,7 +20,10 @@ function populateGrid(cellCount){
             div.className = "cell";
             divRow.appendChild(div);
         }
-    } 
+    }
+
+    cells = document.querySelectorAll(".cell");
+    activateHoverEffect();
 }
 
 function updateGrid(){
@@ -26,6 +35,45 @@ function updateGrid(){
     else{
         alert("that will not work");
     }
+}
+
+// There is a reason for creating 3 different functions to run activateEffect(effect) instead of putting it in the button event listeners like this
+// document.querySelector("#btn-darkening").addEventListener("click", activateEffect("darkening"));
+// This is because when putting in the button event listener, the event listeners are applied when the page is loading right at the start
+// Therefore, the value of effect defaults to the last button listener in the code 
+
+function activateHoverEffect(){
+    activateEffect("hover");
+}
+
+function activateRainbowEffect(){
+    activateEffect("rainbow");
+}
+
+function activateDarkeningEffect(){
+    activateEffect("darkening");
+}
+
+function activateEffect(effect){
+    console.log(effect);
+    cells.forEach(cell => clearEventListener(cell));
+    cells = document.querySelectorAll(".cell");
+
+    switch (effect){
+        case "rainbow":
+            cells.forEach(cell => cell.addEventListener("pointerenter", rainbowEffect));
+            break;
+        case "darkening":
+            cells.forEach(cell => cell.addEventListener("pointerenter", darkeningEffect));
+            break;
+        case "hover":
+            cells.forEach(cell => cell.addEventListener("pointerenter", hoverEffect));
+
+    }
+}
+
+function clearEventListener(cell){
+    cell.replaceWith(cell.cloneNode(true));
 }
 
 function hoverEffect(e){
@@ -57,28 +105,23 @@ function darkeningEffect(e){
     
 }
 
-function activateDarkeningEffect(){
-    cells.forEach(cell => clearEventListener(cell));
-    cells.forEach(cell => cell.addEventListener("pointerenter", darkeningEffect));
-}
-function activateHoverEffect(){
-    cells.forEach(cell => cell.addEventListener("pointerenter", hoverEffect));
-}
 
-function activateRainbowEffect(){
-    cells.forEach(cell => clearEventListener(cell));
-    cells.forEach(cell => cell.addEventListener("pointerenter", rainbowEffect));
-}
+//old implementation idea before making it cleaner
 
-function clearEventListener(cell){
-    cell.replaceWith(cell.cloneNode(true));
-    cells = document.querySelectorAll(".cell");
-}
+// function activateDarkeningEffect(){
+//     cells.forEach(cell => clearEventListener(cell));
+//     cells = document.querySelectorAll(".cell");
+//     cells.forEach(cell => cell.addEventListener("pointerenter", darkeningEffect));
+// }
+// function activateHoverEffect(){
+//     cells.forEach(cell => clearEventListener(cell));
+//     cells = document.querySelectorAll(".cell");
+//     cells.forEach(cell => cell.addEventListener("pointerenter", hoverEffect));
+// }
 
-populateGrid(16);
-let cells = document.querySelectorAll(".cell");
-activateHoverEffect();
-document.querySelector("#btn-update-grid").addEventListener("click", updateGrid);
-document.querySelector("#btn-rainbow").addEventListener("click", activateRainbowEffect);
-document.querySelector("#btn-darkening").addEventListener("click", activateDarkeningEffect);
+// function activateRainbowEffect(){
+//     cells.forEach(cell => clearEventListener(cell));
+//     cells = document.querySelectorAll(".cell");
+//     cells.forEach(cell => cell.addEventListener("pointerenter", rainbowEffect));
+// }
 
