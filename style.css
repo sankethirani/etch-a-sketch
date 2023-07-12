@@ -1,6 +1,6 @@
 #grid-container {
-    height: 500px;
-    width: 500px;
+    height: calc(100vh - 100px);
+    width: 100%;
     display: grid;
 }
 #grid-container div {
@@ -9,5 +9,5 @@
 
 #grid-container div div{
     flex: 1 1 0;
-    border: 1px solid black;
+    margin: 1px;
 }
