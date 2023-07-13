@@ -9,7 +9,7 @@
 
 #grid-container div div{
     flex: 1 1 0;
-    margin: 1px;
+    margin: 0.5px;
 }
 
 button {
