@@ -58,7 +58,6 @@ function activateDarkeningEffect(){
 }
 
 function activateEffect(effect){
-    console.log(effect);
     cells.forEach(cell => clearEventListener(cell));
     cells = document.querySelectorAll(".cell");
 
