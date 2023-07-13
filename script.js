@@ -1,5 +1,13 @@
 let cells = []
-populateGrid(16);
+function autoPopulateGrid(){
+    w = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth
+    boxes = 50
+    populateGrid(w / boxes);
+}
+autoPopulateGrid()
+document.addEventListener("resize", function (e) {
+    autoPopulateGrid()
+});
 document.querySelector("#btn-update-grid").addEventListener("click", updateGrid);
 document.querySelector("#btn-rainbow").addEventListener("click", activateRainbowEffect);
 document.querySelector("#btn-darkening").addEventListener("click", activateDarkeningEffect);
@@ -55,7 +63,6 @@ function activateDarkeningEffect(){
 }
 
 function activateEffect(effect){
-    console.log(effect);
     cells.forEach(cell => clearEventListener(cell));
     cells = document.querySelectorAll(".cell");
 
