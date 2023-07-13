@@ -1,5 +1,8 @@
 let cells = []
-populateGrid(16);
+populateGrid(screen.width / 30);
+document.addEventListener("resize", function (e) {
+    populateGrid(screen.width / 30);
+});
 document.querySelector("#btn-update-grid").addEventListener("click", updateGrid);
 document.querySelector("#btn-rainbow").addEventListener("click", activateRainbowEffect);
 document.querySelector("#btn-darkening").addEventListener("click", activateDarkeningEffect);
