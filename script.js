@@ -1,7 +1,12 @@
 let cells = []
-populateGrid(screen.width / 30);
+function autoPopulateGrid(){
+    w = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth
+    boxes = 50
+    populateGrid(w / boxes);
+}
+autoPopulateGrid()
 document.addEventListener("resize", function (e) {
-    populateGrid(screen.width / 30);
+    autoPopulateGrid()
 });
 document.querySelector("#btn-update-grid").addEventListener("click", updateGrid);
 document.querySelector("#btn-rainbow").addEventListener("click", activateRainbowEffect);
